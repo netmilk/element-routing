@@ -1,0 +1,30 @@
+{
+  "name": "element-routing",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha ./test/**/**/*.spec.js ./test/**/*.spec.js",
+    "test:watch": "mocha ./test/**/**/*.spec.js ./test/**/*.spec.js --watch",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "Adam Kliment <adam@netmilk.net>",
+  "license": "MIT",
+  "dependencies": {
+    "jsonpath": "^1.0.0",
+    "mocha": "^5.2.0",
+    "npm": "^6.4.1",
+    "nyc": "^13.1.0",
+    "uri-templates": "^0.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
+  }
+}
