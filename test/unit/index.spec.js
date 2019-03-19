@@ -21,6 +21,7 @@ describe('getResults', () => {
     expect(results[0].request).to.be.an('object');
     expect(results[0].request.method).to.be.eq('POST');
     expect(results[0].response.statusCode).to.be.eq(200);
+    expect(results[0].request.bodySchema).to.be.an('object');
   });
 
   it('#getResults /clients GET', () => {

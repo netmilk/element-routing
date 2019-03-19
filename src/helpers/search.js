@@ -40,6 +40,7 @@ module.exports.filterTransactions = (transition) => {
     }));
     const requestAssetAttributes = jsonpath.query(request, '$..content[?(@.element=="asset")].attributes[*].content')[0];
     const requestAssetContent = jsonpath.query(request, '$..content[?(@.element=="asset")].content')[0];
+    const requestBodySchema = JSON.parse(jsonpath.query(request, '$..content[?(@.element=="asset")].content')[1] || null);
 
     const response = jsonpath.query(transaction, '$..content[?(@.element=="httpResponse")]');
     const responseHeaders = jsonpath.query(response, '$..attributes.headers.content[*].content').map(item => ({
@@ -48,6 +49,7 @@ module.exports.filterTransactions = (transition) => {
     }));
     const responseAssetAttributes = jsonpath.query(response, '$..content[?(@.element=="asset")].attributes[*].content')[0];
     const responseAssetContent = jsonpath.query(response, '$..content[?(@.element=="asset")].content')[0];
+    const responseBodySchema = JSON.parse(jsonpath.query(response, '$..content[?(@.element=="asset")].content')[1] || null);
     const responseStatusCode = Number(jsonpath.query(response, '$..attributes.statusCode.content')[0]);
 
     return {
@@ -56,12 +58,14 @@ module.exports.filterTransactions = (transition) => {
         headers: requestHeaders,
         type: requestAssetAttributes,
         content: requestAssetContent,
+        bodySchema: requestBodySchema,
       },
       response: {
         headers: responseHeaders,
         type: responseAssetAttributes,
         content: responseAssetContent,
         statusCode: responseStatusCode,
+        bodySchema: responseBodySchema,
       },
     };
   });
