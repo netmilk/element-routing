@@ -71,38 +71,25 @@ module.exports.filterTransactions = (transition) => {
   });
 };
 
-module.exports.filterContentType = (data, contentType) => {
-  let result = data;
-  data.forEach((element) => {
-    element.response.headers.forEach((header) => {
-      if (header.key === 'Content-Type' && header.value === contentType) {
-        result = [element];
-      }
-    });
+const filterByHeader = (data, headerName, headerValue) => {
+  const filtered = data.filter((element) => {
+    const header = element.response.headers
+      .find(h => h.key.toLowerCase() === headerName && h.value === headerValue);
+
+    if (header) {
+      return element;
+    }
+    return null;
   });
-  return result;
+
+  if (filtered.length > 0) {
+    return filtered;
+  }
+  return data;
 };
 
-module.exports.filterContentLanguage = (data, contentLanguage) => {
-  let result = data;
-  data.forEach((element) => {
-    element.response.headers.forEach((header) => {
-      if (header.key === 'Content-Language' && header.value === contentLanguage) {
-        result = [element];
-      }
-    });
-  });
-  return result;
-};
+module.exports.filterContentType = (data, contentType) => filterByHeader(data, 'content-type', contentType);
 
-module.exports.filterContentEncoding = (data, contentEncoding) => {
-  let result = data;
-  data.forEach((element) => {
-    element.response.headers.forEach((header) => {
-      if (header.key === 'Content-Encoding' && header.value === contentEncoding) {
-        result = [element];
-      }
-    });
-  });
-  return result;
-};
+module.exports.filterContentLanguage = (data, contentLanguage) => filterByHeader(data, 'content-language', contentLanguage);
+
+module.exports.filterContentEncoding = (data, contentEncoding) => filterByHeader(data, 'content-encoding', contentEncoding);
