@@ -23,8 +23,11 @@ module.exports.findTransitions = (data, url, method) => {
 
   return matchedTemplates.map((found) => {
     const foundItem = jsonpath.query(data, `$..content[?(@.attributes.href.content=="${found}")]`);
-    const transition = jsonpath.query(foundItem, '$..content[?(@.element=="transition")]');
-    return filterTransitions(transition, method);
+    const transitions = [
+      ...jsonpath.query(foundItem, '$[?(@.element=="transition")]'),
+      ...jsonpath.query(foundItem, '$..content[?(@.element=="transition")]'),
+    ];
+    return filterTransitions(transitions, method);
   });
 };
 

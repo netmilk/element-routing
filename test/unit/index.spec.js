@@ -85,7 +85,7 @@ describe('getResults', () => {
   it('#getRsults /resource GET', () => {
     const results = getResults(actionUriOverride, '/resource', 'GET');
 
-    expect(results).to.have.length(2);
+    expect(results).to.have.length(3); // /resource, /respurce{?q}, /resource{?q}
     expect(results[0].response.content).to.contain('1');
   });
 
