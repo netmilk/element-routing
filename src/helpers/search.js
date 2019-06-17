@@ -3,7 +3,7 @@ const uriTemplate = require('uri-templates');
 
 const matchTemplates = (paths, url) => paths.filter((item) => {
   const template = uriTemplate(item);
-  if (template.test(url)) {
+  if (template.test(url, { strict: true })) {
     return item;
   }
   return null;

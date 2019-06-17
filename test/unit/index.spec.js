@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const { getResults } = require('../../index');
 
 const data = require('../fixtures/elements.json');
+const subPath = require('../fixtures/subpath.json');
 
 describe('getResults', () => {
   it('#getResults: empty parameter', () => {
@@ -60,5 +61,23 @@ describe('getResults', () => {
     expect(results).to.have.length(1);
     expect(results[0].request).to.be.an('object');
     expect(results[0].request.method).to.be.eq('PUT');
+  });
+
+  it('#getResults /clients/1 GET', () => {
+    const results = getResults(subPath, '/clients/1', 'GET');
+
+    expect(results).to.have.length(1);
+    expect(results[0].request).to.be.an('object');
+    expect(results[0].request.method).to.be.eq('GET');
+    expect(results[0].response.content).to.contain('John Doe');
+  });
+
+  it('#getResults /clients/1/messages GET', () => {
+    const results = getResults(subPath, '/clients/1/messages', 'GET');
+
+    expect(results).to.have.length(1);
+    expect(results[0].request).to.be.an('object');
+    expect(results[0].request.method).to.be.eq('GET');
+    expect(results[0].response.content).to.contain('Message text');
   });
 });

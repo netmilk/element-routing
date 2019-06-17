@@ -1,0 +1,35 @@
+FORMAT: 1A
+
+# Sub path gets matched
+
+## Clients [/clients/{id}]
+
++ Parameters
+    + id: 1 (number)
+
+### Get Client Detail [GET]
+
++ Response 200 (application/json)
+    + Attributes (array[Client])
+
+## Client's Messages [/clients/{id}/messages]
+
++ Parameters
+    + id: 1 (number)
+
+### Get Client's messages [GET]
+
++ Response 200 (application/json)
+    + Attributes (array[Message])
+
+## Data structures
+
+### Client
+
+- id: 1 (number)
+- name: `John Doe` (string)
+
+### Message
+
+- id: 1 (number)
+- text: `Message text` (string)
