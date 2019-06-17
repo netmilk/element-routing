@@ -23,10 +23,10 @@ module.exports.findTransitions = (data, url, method) => {
 
   return matchedTemplates.map((found) => {
     const foundItem = jsonpath.query(data, `$..content[?(@.attributes.href.content=="${found}")]`);
-    const transitions = [
-      ...jsonpath.query(foundItem, '$[?(@.element=="transition")]'),
-      ...jsonpath.query(foundItem, '$..content[?(@.element=="transition")]'),
-    ];
+    const transitions = [].concat(
+      jsonpath.query(foundItem, '$[?(@.element=="transition")]'),
+      jsonpath.query(foundItem, '$..content[?(@.element=="transition")]')
+    );
     return filterTransitions(transitions, method);
   });
 };
