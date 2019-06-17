@@ -1,10 +1,8 @@
-const fs = require('fs');
-const path = require('path');
 const { expect } = require('chai');
 const { findTransitions, filterTransactions } = require('../../src/helpers/search');
 
-const data = JSON.parse(fs.readFileSync(path.resolve('./test/fixtures/elements.json'), 'utf8'));
-const transition = JSON.parse(fs.readFileSync(path.resolve('./test/fixtures/transitions.json'), 'utf8'));
+const data = require('../fixtures/elements.json');
+const transition = require('../fixtures/transitions.json');
 
 describe('Helpers', () => {
   describe('Search', () => {

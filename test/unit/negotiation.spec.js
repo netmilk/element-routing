@@ -1,10 +1,8 @@
-const fs = require('fs');
-const path = require('path');
 const { expect } = require('chai');
 
 const { getResults } = require('../../index');
 
-const data = JSON.parse(fs.readFileSync(path.resolve('./test/fixtures/negotiation.json'), 'utf8'));
+const data = require('../fixtures/negotiation.json');
 
 describe('Negotiation', () => {
   it('#getResults /questions GET text/html', () => {
@@ -67,7 +65,7 @@ describe('Negotiation', () => {
   });
 
   it('#getResults /questions GET', () => {
-    const results = getResults(data, '/questions', 'GET', { });
+    const results = getResults(data, '/questions', 'GET', {});
 
     expect(results).to.have.length(3);
     expect(results[0].request).to.be.an('object');

@@ -1,17 +1,15 @@
-const fs = require('fs');
-const path = require('path');
 const { expect } = require('chai');
 
 const { getResults } = require('../../index');
 
-const data = JSON.parse(fs.readFileSync(path.resolve('./test/fixtures/elements.json'), 'utf8'));
+const data = require('../fixtures/elements.json');
 
 describe('getResults', () => {
   it('#getResults: empty parameter', () => {
     expect(() => getResults()).to.throw('One of required parameter is missing!');
-    expect(() => getResults({ })).to.throw('One of required parameter is missing!');
-    expect(() => getResults({ }, '')).to.throw('One of required parameter is missing!');
-    expect(() => getResults({ }, '', '')).to.throw('One of required parameter is missing!');
+    expect(() => getResults({})).to.throw('One of required parameter is missing!');
+    expect(() => getResults({}, '')).to.throw('One of required parameter is missing!');
+    expect(() => getResults({}, '', '')).to.throw('One of required parameter is missing!');
   });
 
   it('#getResults /webhooks POST', () => {
