@@ -4,6 +4,7 @@ const { getResults } = require('../../index');
 
 const data = require('../fixtures/elements.json');
 const subPath = require('../fixtures/subpath.json');
+const actionUriOverride = require('../fixtures/action_uri_override.json');
 
 describe('getResults', () => {
   it('#getResults: empty parameter', () => {
@@ -79,5 +80,19 @@ describe('getResults', () => {
     expect(results[0].request).to.be.an('object');
     expect(results[0].request.method).to.be.eq('GET');
     expect(results[0].response.content).to.contain('Message text');
+  });
+
+  it('#getRsults /resource GET', () => {
+    const results = getResults(actionUriOverride, '/resource', 'GET');
+
+    expect(results).to.have.length(2);
+    expect(results[0].response.content).to.contain('1');
+  });
+
+  it('#getRsults /resource?q=test GET', () => {
+    const results = getResults(actionUriOverride, '/resource?q=test', 'GET');
+
+    expect(results).to.have.length(1);
+    expect(results[0].response.content).to.contain('2');
   });
 });
